@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Rise_of_Derma.entities
 {
-    internal class skeleton
+    internal class Skeleton
     {
     }
 }
