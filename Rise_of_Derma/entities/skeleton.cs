@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace Rise_of_Derma.entities
 {
-    internal class Skeleton
+    class Skeleton : Entity
     {
+        public Skeleton() { this.setAppearanceTo('§'); }
     }
 }
