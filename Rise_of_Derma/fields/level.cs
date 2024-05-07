@@ -26,7 +26,13 @@ namespace Rise_of_Derma.fields
         // Display level function
         public void display()
         {
-            
+            // Only Debug
+            if (true)
+            {
+                Player p1 = (Player)entities[0];
+                FastConsole.WriteLine($"Crystal's count: {p1.getCrystalCount()} | Health: {p1.getHealth()}% | Level: {p1.getPower()} | Pos: X:{p1.getPosX()} Y:{p1.getPosY()}");
+                FastConsole.Flush();
+            }
 
             for (int i = 0; i <= this.W + 1; i++)
             {
