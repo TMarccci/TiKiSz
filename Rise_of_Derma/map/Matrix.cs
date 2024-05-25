@@ -3,29 +3,36 @@ using Rise_of_Derma.providers;
 using System.Numerics;
 using System.Threading;
 using System.Timers;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace Rise_of_Derma.map
 {
     public class Matrix
     {
+        // Properties and variables
         private char[,] Area { get; }
         private int W = 80;
         private int H = 20;
         private System.Timers.Timer timer;
 
-        public (int x, int y) PlayerPos { get; private set; }
+        private (int x, int y) PlayerPos { get; set; }
         private bool IsFinished { get; set;  }
         private int Response { get; set; }
         private int TimeSpent { get; set; }
         private bool DisplayTimer { get; set; }
+        // TODO: CRYSTALS
 
+        // Constructors, first used by main menu, seconds by levels
         public Matrix(IEnumerable<string> l)
         {
+            // Create and set variables
             Area = new char[W, H];
             IsFinished = false;
             Response = 0;
             TimeSpent = 0;
             DisplayTimer = false;
+
+            // Run initalization
             FillWithSpace();
             StartTimer();
             ParseMap(l);
@@ -33,32 +40,50 @@ namespace Rise_of_Derma.map
 
         public Matrix(IEnumerable<string> l, bool displayTimer, int elapsed)
         {
+            // Create and set variables
             Area = new char[W, H];
             IsFinished = false;
             Response = 0;
             TimeSpent = 0 + elapsed;
             DisplayTimer = displayTimer;
+
+            // Run initalization
             FillWithSpace();
             StartTimer();
             ParseMap(l);
         }
 
+        // Parse map function, this puts the objects into the matrix
         private void ParseMap(IEnumerable<string> l)
         {
+            // Go thru each line of the map
+
             foreach (string s in l)
             {
+                // Split than parse variables
                 string[] n = s.Split(';');
 
                 int x = int.Parse(n[0]);
                 int y = int.Parse(n[1]);
                 string type = n[2];
 
+                // Supported types:
+                // 50;15;PLAYERSPAWN
+                //  4; 2;TEXT       ;RISE OF DERMA
+                // 15; 9;BUTTON     ;10; 3;START!;#
+                // 20; 5;WALL
+                // 60; 9;FINISHLEVEL
+                // 50; 3;CRYSTAL
+
                 switch (type)
                 {
+                    // Handle the spawn of the player
                     case "PLAYERSPAWN":
                         SetCharTo(x, y, 'x');
                         PlayerPos = (x, y);
                         break;
+
+                    // Put text on matrix
                     case "TEXT":
                         string text = n[3];
                         int textLen = text.Length;
@@ -68,6 +93,8 @@ namespace Rise_of_Derma.map
                             SetCharTo(x + i, y, text[i]);
                         }
                         break;
+
+                    // Button like object on map, every button border must handled
                     case "BUTTON":
                         int w = int.Parse(n[3]) + 2;
                         int h = int.Parse(n[4]);
@@ -91,12 +118,18 @@ namespace Rise_of_Derma.map
                             SetCharTo(x + i + (w / 2) - (buttonTextLen / 2), y + 1, buttonText[i]);
                         }
                         break;
+
+                    // Wall object
                     case "WALL":
-                        SetCharTo(x, y, char.Parse(n[3]));
+                        SetCharTo(x, y, '@');
                         break;
+
+                    // Finish level point
                     case "FINISHLEVEL":
                         SetCharTo(x, y, 'C');
                         break;
+
+                    // Crystal
                     case "CRYSTAL":
                         SetCharTo(x, y, '*');
                         break;
@@ -104,6 +137,7 @@ namespace Rise_of_Derma.map
             }
         }
 
+        // This starts a timer with the level
         private async void StartTimer()
         {
             timer = new System.Timers.Timer();
@@ -112,9 +146,12 @@ namespace Rise_of_Derma.map
             timer.Enabled = true;
         }
 
+        // This runs every seconds (if DisplayTimer true than updates on the screen)
         private void TickTime(Object source, System.Timers.ElapsedEventArgs e) { 
+            // Bump time spent
             TimeSpent += 1;
 
+            // If display enabled update on screen
             if (DisplayTimer)
             {
                 Console.SetCursorPosition(0, Console.GetCursorPosition().Top-2);
@@ -123,6 +160,7 @@ namespace Rise_of_Derma.map
             }
         }
 
+        // This fills the matrix with empty spaces
         private void FillWithSpace()
         {
             // Fill the area with empty spaces
@@ -135,6 +173,7 @@ namespace Rise_of_Derma.map
             }
         }
 
+        // This displays the matrix's content with walls and stats, etc
         public void Display()
         {
             // Print the top border
@@ -158,38 +197,48 @@ namespace Rise_of_Derma.map
             FastConsole.Flush();
 
             // Statistic Bars
+            // Time Spent Part, if DisplayTimer enabled than it shows else empty line
             if (DisplayTimer)
             {
                 Console.WriteLine($"Eltelt idő: {TimeFormats.FormatSeconds(getTimeSpent())}");
             }
             else { Console.WriteLine(); }
+
+            // TODO: SHOW ETC STATS
             Console.WriteLine();
         }
 
+        // Updates to a specific char in the matrix (LEFT, TOP, CHAR)
         public void SetCharTo(int x, int y, char c)
         {
             Area[x, y] = c;
         }
 
+        // Returns the IsFinished property
         public bool isFinished()
         {
             return IsFinished;
         }
 
+        // Returns the Response property
         public int getResponse()
         {
             return Response;
         }
 
+        // Returns the TimeSpent property
         public int getTimeSpent() {
             return TimeSpent; 
         }
 
+        // This sets the level's response to default
         public void setResponseDefault()
         { Response = 0; }
 
+
         public void movePlayer(int x, int y)
         {
+            // If inside the matrix than...
             if ((x > -1 && x < W) && (y > -1 && y < H))
             {
                 char c = Area[x, y];
@@ -212,15 +261,17 @@ namespace Rise_of_Derma.map
                 // Crystal
                 else if (c == '*') 
                 {
-                    Response = 3;
+                    // TODO Handle pickup
                 }
                 // Finish Level Character
                 else if (c == 'C')
                 {
                     IsFinished = true;
                     timer.Enabled = false;
-
                 }
+                // TODO: Handle other characters
+
+                // If not any special case than move player to the wanted position
                 else
                 {
                     SetCharTo(PlayerPos.x, PlayerPos.y, ' ');
@@ -230,12 +281,14 @@ namespace Rise_of_Derma.map
             }
         }
 
+        // This function handles the movement inside the matrix
         public void HandleKey()
         {
+            // Get key
             ConsoleKeyInfo cki = new ConsoleKeyInfo();
-
             cki = Console.ReadKey(true);
 
+            // Parse basic movement than call in movePlayer to check if possible
             switch (cki.Key)
             {
                 case ConsoleKey.LeftArrow:
