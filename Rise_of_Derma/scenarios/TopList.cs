@@ -43,7 +43,7 @@ namespace Rise_of_Derma.scenarios
         private async void GetTopListFromServer()
         {
             // Backend
-            string url = "http://127.0.0.1:5000/get_top_list";
+            string url = "https://rod.tmarccci.hu/get_top_list";
 
             // Create a new HttpClient instance
             using (HttpClient client = new HttpClient())
