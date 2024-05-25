@@ -1,24 +1,27 @@
 ﻿// Import Libraries
 using Rise_of_Derma.scenarios;
+using Rise_of_Derma.providers;
 
 // Initial Windows Setup (Pragma for ignore alert)
 #pragma warning disable CA1416
-Console.SetWindowSize(82, 24);
+Console.SetWindowSize(82, 25);
 Console.Title = "Rise of Derma";
 #pragma warning restore CA1416
 
-// Demo
-Scenario currentScenario = new DemoScenario();
+// Initialise configs (Necessary because if no config file program will crash)
+Config config = new Config();
 
-// Main game loop + Controls
-ConsoleKeyInfo cki = new ConsoleKeyInfo();
+// Print the intro for the user
+Intro intro = new Intro();
+intro.InitIntro();
 
-do
-{
-    while (Console.KeyAvailable == false)
-        Thread.Sleep(250);
-    cki = Console.ReadKey(true);
+// Get users name if the config doesnt include it
+Name name = new Name();
+name.Set();
 
-    currentScenario.ProcessInput(cki);
+// Refresh Config because changes may occure
+config.refreshConfig();
 
-} while (cki.Key != ConsoleKey.X);
+// Run Game thru Main Menu
+MainMenu mainMenu = new MainMenu();
+mainMenu.InitMainMenu();

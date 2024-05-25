@@ -1,5 +1,7 @@
 ﻿using System.Text;
 
+// Thank you for the help: https://github.com/crowfingers/FastConsole
+
 namespace Rise_of_Derma.providers
 {
     public static class FastConsole

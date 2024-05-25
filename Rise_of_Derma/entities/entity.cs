@@ -1,61 +1,37 @@
 ﻿namespace Rise_of_Derma.entities
 {
-    class Entity
+    public class Entity
     {
         private int health = 100;
-        private char appearance;
-        private int power = 1;
-
-        private int prevPosX;
-        private int prevPosY;
         private int posX;
         private int posY;
 
-        public void damage(int amount)
-        {
-            this.health -= amount;
+        public int Health 
+        { 
+            get { return health; }
+            set { health = (value <= 100 && value > 0) ? value : 100; } 
         }
-        public void regenerate(int amount)
-        {
-            this.health += amount;
-        }
-        public void setHealthTo(int amount)
-        {
-            this.health = amount;
-        }
-        public int getHealth() { return this.health; }
+        public char Appearance { get; set; }
+        public int Power { get; set; }
 
-        public void setAppearanceTo(char value)
-        {
-            this.appearance = value;
+        public int PosX 
+        { 
+            get { return posX; }
+            set { posX = (value < 80 && value >= 0) ? value : 0 ; } 
         }
-        public char getAppearance() { return this.appearance; }
+        public int PosY
+        {
+            get { return posY; }
+            set { posY = (value < 20 && value >= 0) ? value : 0; }
+        }
 
-        public void weaken(int amount)
+        public Entity(int health, char appearance, int power, int posX, int posY)
         {
-            this.power -= amount;
-        }
-        public void strenghten(int amount)
-        {
-            this.power += amount;
-        }
-        public void setPowerTo(int amount)
-        {
-            this.power = amount;
-        }
-        public int getPower() { return this.power; }
-
-        public int getPrevPosX() { return prevPosX; }
-        public int getPrevPosY() { return prevPosY; }
-        public int getPosX() { return posX; }
-        public int getPosY() { return posY; }
-
-        public void moveEntityProperties(int prevPosX, int prevPosY, int posX, int posY)
-        {
-            this.prevPosX = prevPosX;
-            this.prevPosY = prevPosY;
-            this.posX = posX;
-            this.posY = posY;
+            Health = health;
+            Appearance = appearance;
+            Power = power;
+            PosX = posX;
+            PosY = posY;
         }
     }
 }
