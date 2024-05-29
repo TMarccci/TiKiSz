@@ -1,4 +1,5 @@
 ﻿
+using Rise_of_Derma.entities;
 using Rise_of_Derma.providers;
 using System.Numerics;
 using System.Threading;
@@ -19,8 +20,8 @@ namespace Rise_of_Derma.map
         private bool IsFinished { get; set;  }
         private int Response { get; set; }
         private int TimeSpent { get; set; }
-        private bool DisplayTimer { get; set; }
-        // TODO: CRYSTALS
+        private bool DisplayInformations { get; set; }
+        private Player Playr { get; set; }
 
         // Constructors, first used by main menu, seconds by levels
         public Matrix(IEnumerable<string> l)
@@ -30,7 +31,8 @@ namespace Rise_of_Derma.map
             IsFinished = false;
             Response = 0;
             TimeSpent = 0;
-            DisplayTimer = false;
+            DisplayInformations = false;
+            Playr = new();
 
             // Run initalization
             FillWithSpace();
@@ -38,14 +40,15 @@ namespace Rise_of_Derma.map
             ParseMap(l);
         }
 
-        public Matrix(IEnumerable<string> l, bool displayTimer, int elapsed)
+        public Matrix(IEnumerable<string> l, bool displayInformations, int elapsed, Player playR)
         {
             // Create and set variables
             Area = new char[W, H];
             IsFinished = false;
             Response = 0;
             TimeSpent = 0 + elapsed;
-            DisplayTimer = displayTimer;
+            DisplayInformations = displayInformations;
+            Playr = playR;
 
             // Run initalization
             FillWithSpace();
@@ -133,6 +136,11 @@ namespace Rise_of_Derma.map
                     case "CRYSTAL":
                         SetCharTo(x, y, '*');
                         break;
+
+                    // Enemy
+                    case "ENEMY":
+                        SetCharTo(x, y, char.Parse(n[3]));
+                        break;
                 }
             }
         }
@@ -152,7 +160,7 @@ namespace Rise_of_Derma.map
             TimeSpent += 1;
 
             // If display enabled update on screen
-            if (DisplayTimer)
+            if (DisplayInformations)
             {
                 Console.SetCursorPosition(0, Console.GetCursorPosition().Top-2);
                 Console.WriteLine($"Eltelt idő: {TimeFormats.FormatSeconds(getTimeSpent())}");
@@ -197,15 +205,19 @@ namespace Rise_of_Derma.map
             FastConsole.Flush();
 
             // Statistic Bars
-            // Time Spent Part, if DisplayTimer enabled than it shows else empty line
-            if (DisplayTimer)
+            // Time Spent Part, etc, if DisplayInformations enabled than it shows else empty line
+            if (DisplayInformations)
             {
                 Console.WriteLine($"Eltelt idő: {TimeFormats.FormatSeconds(getTimeSpent())}");
+                Console.WriteLine($"Erő: {Playr.Power} | " +
+                    $"Összegyűjtött kristályok: {Playr.CrystcalCount} db | " +
+                    $"Megölt ellenfelek: {Playr.KilledEnemy} db");
             }
-            else { Console.WriteLine(); }
-
-            // TODO: SHOW ETC STATS
-            Console.WriteLine();
+            else 
+            { 
+                Console.WriteLine();
+                Console.WriteLine();
+            }
         }
 
         // Updates to a specific char in the matrix (LEFT, TOP, CHAR)
@@ -229,6 +241,11 @@ namespace Rise_of_Derma.map
         // Returns the TimeSpent property
         public int getTimeSpent() {
             return TimeSpent; 
+        }
+
+        // Returns the PlayR property
+        public Player getPlayer() { 
+            return Playr; 
         }
 
         // This sets the level's response to default
@@ -261,7 +278,13 @@ namespace Rise_of_Derma.map
                 // Crystal
                 else if (c == '*') 
                 {
-                    // TODO Handle pickup
+                    // Move player to the crystals place
+                    SetCharTo(PlayerPos.x, PlayerPos.y, ' ');
+                    SetCharTo(x, y, 'x');
+                    PlayerPos = (x, y);
+
+                    // Bump crystalcount
+                    Playr.CrystcalCount++;
                 }
                 // Finish Level Character
                 else if (c == 'C')

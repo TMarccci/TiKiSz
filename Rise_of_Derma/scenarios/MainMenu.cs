@@ -1,4 +1,5 @@
-﻿using Rise_of_Derma.map;
+﻿using Rise_of_Derma.entities;
+using Rise_of_Derma.map;
 using System.Diagnostics;
 
 namespace Rise_of_Derma.scenarios
@@ -35,23 +36,21 @@ namespace Rise_of_Derma.scenarios
                     matrix.setResponseDefault();
 
                     // Create a variable that stores the total time spent in game
-                    int totalTimes = 0;
+                    (int, Player) data = (0, new Player());
 
                     // Run level1
                     Level1 level1 = new Level1();
                     // InitLevel returns the time spent in the Level, add it to the total time
-                    totalTimes = level1.InitLevel1(totalTimes);
+                    data = level1.InitLevel1(data.Item1, data.Item2);
 
-                    // Run level2
-                    Level1 level2 = new Level1();
-                    // Here initLevel returns the time spent in the game because it sums the lasts
-                    totalTimes = level2.InitLevel1(totalTimes);
+                    //// Run level2
+                    //Level1 level2 = new Level1();
+                    //// Here initLevel returns the time spent in the game because it sums the lasts
+                    //data = level2.InitLevel1(data.Item1, data.Item2);
 
                     // Game cycle ended show end screen
                     EndScreen endScreen = new EndScreen();
-                    // Pass thru the stats
-                    // TODO: Add other STATS
-                    endScreen.initEndScreen(totalTimes);
+                    endScreen.initEndScreen(data);
                 }
             }
         }
