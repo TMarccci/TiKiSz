@@ -15,7 +15,7 @@ namespace Rise_of_Derma.scenarios
                 Debug.WriteLine("Running Level1");
 
                 // Create and display matrix (LevelFile's content, ShowTime Setting, Elapsed Time)
-                Matrix matrix = new Matrix(File.ReadAllLines("./scenarios/builds/Level1.txt", encoding: System.Text.Encoding.UTF8), true, elapsed, player);
+                Matrix matrix = new Matrix(File.ReadAllLines("./scenarios/builds/Level1.txt", encoding: System.Text.Encoding.UTF8), true, elapsed, player, 1);
 
                 // Loop until level finished
                 while (matrix.isFinished() == false)

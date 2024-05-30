@@ -24,6 +24,7 @@ namespace Rise_of_Derma.map
         private int TimeSpent { get; set; }
         private bool DisplayInformations { get; set; }
         private Player Playr { get; set; }
+        public int AtLevel { get; set; }
 
         // Constructors, first used by main menu, seconds by levels
         public Matrix(IEnumerable<string> l)
@@ -35,6 +36,7 @@ namespace Rise_of_Derma.map
             TimeSpent = 0;
             DisplayInformations = false;
             Playr = new();
+            AtLevel = 0;
 
             // Fill the enemyNumbers list
             for (int i = 1; i < 10; i++)
@@ -48,7 +50,7 @@ namespace Rise_of_Derma.map
             ParseMap(l);
         }
 
-        public Matrix(IEnumerable<string> l, bool displayInformations, int elapsed, Player playR)
+        public Matrix(IEnumerable<string> l, bool displayInformations, int elapsed, Player playR, int level)
         {
             // Create and set variables
             Area = new char[W, H];
@@ -57,8 +59,8 @@ namespace Rise_of_Derma.map
             TimeSpent = 0 + elapsed;
             DisplayInformations = displayInformations;
             Playr = playR;
-
             Playr.Power = 1;
+            AtLevel = level;
 
             // Fill the enemyNumbers list
             for (int i = 1; i < 10; i++)
@@ -179,7 +181,7 @@ namespace Rise_of_Derma.map
             if (DisplayInformations)
             {
                 Console.SetCursorPosition(0, Console.GetCursorPosition().Top-2);
-                Console.WriteLine($"Eltelt idő: {TimeFormats.FormatSeconds(getTimeSpent())}");
+                Console.WriteLine($"{AtLevel}/4. Szint | Eltelt idő: {TimeFormats.FormatSeconds(getTimeSpent())}");
                 Console.SetCursorPosition(0, Console.GetCursorPosition().Top + 1);
             }
         }
@@ -224,7 +226,7 @@ namespace Rise_of_Derma.map
             // Time Spent Part, etc, if DisplayInformations enabled than it shows else empty line
             if (DisplayInformations)
             {
-                Console.WriteLine($"Eltelt idő: {TimeFormats.FormatSeconds(getTimeSpent())}");
+                Console.WriteLine($"{AtLevel}/4. Szint | Eltelt idő: {TimeFormats.FormatSeconds(getTimeSpent())}");
                 Console.WriteLine($"Erő: {Playr.Power} | " +
                     $"Összegyűjtött kristályok: {Playr.CrystcalCount} db | " +
                     $"Megölt ellenfelek: {Playr.KilledEnemy} db");
@@ -404,6 +406,10 @@ namespace Rise_of_Derma.map
                 case ConsoleKey.UpArrow:
                     movePlayer(PlayerPos.x, PlayerPos.y - 1);
                     break;
+                case ConsoleKey.Q:
+                    Environment.Exit(0);
+                    break;
+
             }
         }
     }

@@ -16,6 +16,11 @@ namespace Rise_of_Derma.providers
                 while (Console.KeyAvailable == false)
                     Thread.Sleep(100);
                 cki = Console.ReadKey(true);
+
+                if (cki.Key == ConsoleKey.Q)
+                {
+                    Environment.Exit(0);
+                }
             } while (cki.Key != key);
         }
     }
