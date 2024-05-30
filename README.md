@@ -1,4 +1,4 @@
-# TiKiSz / IKT_Projekt_2_2023
+# TiKiSz / IKT_Projekt_2_2023-2024
 
 ## Játék neve
 
@@ -22,7 +22,7 @@ A játék története ebben a sötét időszakban veszi kezdetét, ahol Finralna
 
   
 
-Ahogy a játékosok előre haladnak, felfedezhetnek új területeket, szövetségeseket gyűjthetnek, és erősebb felszereléseket szerezhetnek, hogy legyőzzék Morgront és visszahozzák a birodalmat a fénybe.
+Ahogy a játékos előre halad, felfedezhet új területeket, ellenségeket győzhet le, gyűjtheti a kristályokat, hogy legyőzzék Morgront és visszahozzák a birodalmat a fénybe.
 
 ## Nevek
 
@@ -39,11 +39,9 @@ Ahogy a játékosok előre haladnak, felfedezhetnek új területeket, szövetsé
 
 ## Játékos célja
 
-Szerezze meg a kristály darabokat, győzze le az ellenfeleket az útja során, majd pedig a kristály segítségével védje meg a birodalmat. Minden kristálydarab megszerzése után a játékos karaktere erősebb lesz.
+Szerezze meg a kristály darabokat, győzze le az ellenfeleket az útja során, majd pedig a kristály segítségével védje meg a birodalmat. 
 
-# Menete
-
-## Lépésenként
+## Játék menete lépésenként
 
 1.  A Játék megnyílik (Teljes képernyő igénybevételével)
     
@@ -51,7 +49,7 @@ Szerezze meg a kristály darabokat, győzze le az ellenfeleket az útja során, 
     
 3.  A program elkéri a játékosnak a nevét
     
-4.  Indítás Gomb, Toplista Gomb megjelenik
+4.  Indítás Gomb, Toplista Gomb, Névcsere gomb megjelenik
     
 5.  Megnyomta a játékos, az indítást, akkor elindul a játék
     
@@ -66,15 +64,11 @@ Szerezze meg a kristály darabokat, győzze le az ellenfeleket az útja során, 
     
 4.  Ellenfelek
     
-5.  Összeállított kristály helye
-    
-6.  Első kristály töredék
+5.  Kristály töredékek
     
 
-8.  A játékos végigmegy a pályán megküzdve a szörnyekkel, majd az adott szint úgy zárul, hogy a játékos felveszi a kristályt, ezt követően a következő szinten erősebb lesz.
+8.  A játékos végigmegy a pályán megküzdve a szörnyekkel, meg gyűjtögeti a kristályokat.
     
 9.  A szintek arányosan nehezednek
     
-10.  Miután elér a játékos az utolsó szintre, akkor vissza kell vinnie a kristályt a szinteken visszafelé haladva az első pályára a kristály eredeti helyére. Mindeközben meg kell küzdenie visszafelé is szörnyekkel, akik erősebbek lettek azóta.
-    
-11.  A visszaillesztett kristály végez a fő ellenféllel és a kisebb ellenfelekkel is, a játék sikeresen teljesítve.
+10.  A szintek teljesítését követően összeáll a kristály és a birodalom megmenekül.
