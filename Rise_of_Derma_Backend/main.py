@@ -24,8 +24,9 @@ def get_top_list():
 @app.route("/send_result", methods=["POST"])
 def add_to_top_list():
     # Get the name and time from the request body form-data
-    name = request.form["name"]
-    time = int(request.form["time"])
+    data = request.json
+    name = data["name"]
+    time = int(data["time"])
     
     # Open the file and read the lines
     top_list = []
