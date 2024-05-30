@@ -54,18 +54,8 @@ Szerezze meg a kristály darabokat, győzze le az ellenfeleket az útja során, 
 5.  Megnyomta a játékos, az indítást, akkor elindul a játék
     
 6.  Megjelennek a következő elemek a képernyőn:
-    
-
-1.  Játékos
-    
-2.  Pálya Kerete
-    
-3.  Pálya Elemei
-    
-4.  Ellenfelek
-    
-5.  Kristály töredékek
-    
+    Játékos, Pálya Kerete, Pálya Elemei, Ellenfelek, Kristály töredékek
+   
 
 8.  A játékos végigmegy a pályán megküzdve a szörnyekkel, meg gyűjtögeti a kristályokat.
     
