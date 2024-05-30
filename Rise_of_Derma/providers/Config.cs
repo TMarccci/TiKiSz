@@ -98,5 +98,7 @@ namespace Rise_of_Derma.providers
         {
             parseConfig();
         }
+
+        public string getConfigPath() { return ConfigPath; }
     }
 }

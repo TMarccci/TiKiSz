@@ -14,7 +14,7 @@ namespace Rise_of_Derma.scenarios
 {
     public class EndScreen
     {
-        public void initEndScreen((int, Player) data) 
+        public void initEndScreen((int, Player, bool) data) 
         {
             // Show the endScreen than wait for key
             Display(data.Item1, data.Item2);
