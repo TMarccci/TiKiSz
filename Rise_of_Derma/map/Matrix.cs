@@ -321,6 +321,11 @@ namespace Rise_of_Derma.map
                 {
                     Response = 100;
                 }
+                // Name Change Button Character
+                else if (c == 'N')
+                {
+                    Response = 105;
+                }
                 // Wall
                 else if (c == '@')
                 {

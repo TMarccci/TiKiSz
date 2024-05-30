@@ -153,6 +153,20 @@ namespace Rise_of_Derma.scenarios
                         }
                     }
                 }
+
+                // Name change
+                else if (matrix.getResponse() == 105)
+                {
+                    matrix.setResponseDefault();
+
+                    Config config = new Config();
+                    config.setConfig("UserName", "");
+
+                    Name name = new Name();
+                    name.Set();
+                }
+
+                // Exit
                 else if (matrix.getResponse() == 100)
                 {
                     return;

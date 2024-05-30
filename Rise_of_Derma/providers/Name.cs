@@ -34,6 +34,8 @@ namespace Rise_of_Derma.providers
 
         private String GetUserName()
         {
+            Console.Clear();
+
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine();
