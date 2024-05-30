@@ -399,19 +399,19 @@ namespace Rise_of_Derma.map
             // Parse basic movement than call in movePlayer to check if possible
             switch (cki.Key)
             {
-                case ConsoleKey.LeftArrow:
+                case ConsoleKey x when (x == ConsoleKey.LeftArrow || x == ConsoleKey.A):
                     movePlayer(PlayerPos.x - 1, PlayerPos.y);
                     break;
-                case ConsoleKey.RightArrow:
+                case ConsoleKey x when (x == ConsoleKey.RightArrow || x == ConsoleKey.D):
                     movePlayer(PlayerPos.x + 1, PlayerPos.y);
                     break;
-                case ConsoleKey.DownArrow:
+                case ConsoleKey x when (x == ConsoleKey.DownArrow || x == ConsoleKey.S):
                     movePlayer(PlayerPos.x, PlayerPos.y + 1);
                     break;
-                case ConsoleKey.UpArrow:
+                case ConsoleKey x when (x == ConsoleKey.UpArrow || x == ConsoleKey.W):
                     movePlayer(PlayerPos.x, PlayerPos.y - 1);
                     break;
-                case ConsoleKey.Q:
+                case ConsoleKey.Escape:
                     Environment.Exit(0);
                     break;
 

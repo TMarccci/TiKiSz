@@ -31,23 +31,25 @@ namespace Rise_of_Derma.scenarios
             Console.WriteLine();
             Console.WriteLine();
             Console.WriteLine("     Statisztikáid:");
-            Console.WriteLine($"       Játékban töltött időd: {TimeFormats.FormatSeconds(seconds)}");
-            Console.WriteLine($"       Megölt ellenfelek: {player.KilledEnemy} db");
-            Console.WriteLine($"       Összegyűjtött kristályok: {player.CrystcalCount} db");
+            Console.WriteLine($"       Játékban töltött időd: {TimeFormats.FormatSeconds(seconds)}               ⠀⠀⠀⠀⠀⠀⠀⠀⠀⢀⡀⠀⠀⠀⠀⠀⠀⠀⠀⠀");
+            Console.WriteLine($"       Megölt ellenfelek: {player.KilledEnemy} db                    ⠀⠀⠀⠀⣠⡶⠀⣸⣇⠀⢶⣄⠀⠀⠀⠀⠀⠀");
+            Console.WriteLine($"       Összegyűjtött kristályok: {player.CrystcalCount} db       ⠀     ⠀⠀⢀⣠⣾⣿⠃⢠⣿⣿⡄⠘⣿⣷⣄⡀⠀⠀⠀");
+            Console.WriteLine($"                                                  ⠀⢀⣴⣿⣿⣿⡿⠀⣼⣿⣿⣧⠀⢿⣿⣿⣿⣦⡀⠀");
+            Console.WriteLine($"                                                  ⠠⣈⠙⠻⢿⣿⠃⢰⣿⣿⣿⣿⡆⠘⣿⡿⠟⠋⣁⠄"); 
+            Console.WriteLine($"                                             ⠀     ⣿⣿⣶⣤⡀⠀⠉⠉⠉⠉⠉⠉⠀⢀⣤⣶⣿⣿⠀");
+            Console.WriteLine($"    Eredményeidet szinkronizáltuk!                ⠀⢹⣿⣿⣿⣧⠀⣿⣿⣿⣿⣿⣿⠀⣼⣿⣿⣿⡏⠀");
+            Console.WriteLine($"       Ha úgy véljük, hogy eredményed             ⠀⢸⣿⣿⣿⣿⠀⣿⣿⣿⣿⣿⣿⠀⣿⣿⣿⣿⡇⠀");
+            Console.WriteLine($"       eléri a szintet a Top Listára való         ⠀⠈⣿⣿⣿⣿⠀⣿⣿⣿⣿⣿⣿⠀⣿⣿⣿⣿⠁⠀");
+            Console.WriteLine($"       felkerüléshez, felkerülsz oda!             ⠀⠀⢻⣿⣿⣿⠀⣿⣿⣿⣿⣿⣿⠀⣿⣿⣿⡟⠀⠀");
+            Console.WriteLine($"                                                  ⠀⠀⢸⣿⣿⣿⠀⣿⣿⣿⣿⣿⣿⠀⣿⣿⣿⡇⠀⠀");
+            Console.WriteLine($"                                                  ⠀⠀⠘⣿⣿⣿⠀⣿⣿⣿⣿⣿⣿⠀⣿⣿⣿⠃⠀⠀");
+            Console.WriteLine($"                                                  ⠀⠀⠀⢻⣿⣿⠀⢹⣿⣿⣿⣿⡏⠀⣿⣿⡟⠀⠀⠀");
+            Console.WriteLine($"                                                  ⠀⠀⠀⠀⠙⢿⠀⢸⣿⣿⣿⣿⡇⠀⡿⠋⠀⠀⠀⠀");
+            Console.WriteLine($"                                             ⠀⠀⠀⠀⠀     ⠀⠀⠈⠉⠉⠉⠉⠁⠀⠀⠀⠀⠀⠀⠀");
             Console.WriteLine();
-            Console.WriteLine(); 
             Console.WriteLine();
-            Console.WriteLine("     Eredményeidet szinkronizáltuk!");
-            Console.WriteLine("     Ha úgy véljük, hogy eredményed eléri a szintet a Top Listára való");
-            Console.WriteLine("     felkerüléshez, felkerülsz oda!");
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine();
-            Console.WriteLine("     Vissza (Enter)");
+            Console.WriteLine($"     Vissza (Enter)");
+
         }
 
         private async void SyncDataWithServer(int seconds)

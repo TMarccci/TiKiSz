@@ -1,6 +1,11 @@
 ﻿// Import Libraries
 using Rise_of_Derma.scenarios;
 using Rise_of_Derma.providers;
+using System.Runtime.InteropServices;
+
+// Change Icon
+IconChanger icon = new IconChanger();
+icon.SetConsoleIcon("./icon.ico");
 
 // Initial Windows Setup (Pragma for ignore alert)
 #pragma warning disable CA1416

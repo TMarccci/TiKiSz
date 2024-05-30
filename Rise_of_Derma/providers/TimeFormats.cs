@@ -13,7 +13,7 @@ namespace Rise_of_Derma.providers
             int minutes = totalSeconds / 60;
             int seconds = totalSeconds % 60;
 
-            return $"{minutes}:{seconds:D2}";
+            return $"{minutes:D2}:{seconds:D2}";
         }
     }
 }

@@ -17,7 +17,7 @@ namespace Rise_of_Derma.providers
                     Thread.Sleep(100);
                 cki = Console.ReadKey(true);
 
-                if (cki.Key == ConsoleKey.Q)
+                if (cki.Key == ConsoleKey.Escape)
                 {
                     Environment.Exit(0);
                 }
