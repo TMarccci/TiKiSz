@@ -1,6 +1,7 @@
 ﻿
 using Rise_of_Derma.entities;
 using Rise_of_Derma.providers;
+using System.Diagnostics;
 using System.Numerics;
 using System.Threading;
 using System.Timers;
@@ -15,6 +16,7 @@ namespace Rise_of_Derma.map
         private int W = 80;
         private int H = 20;
         private System.Timers.Timer timer;
+        List<string> enemyNumbers = new();
 
         private (int x, int y) PlayerPos { get; set; }
         private bool IsFinished { get; set;  }
@@ -34,6 +36,12 @@ namespace Rise_of_Derma.map
             DisplayInformations = false;
             Playr = new();
 
+            // Fill the enemyNumbers list
+            for (int i = 1; i < 10; i++)
+            {
+                enemyNumbers.Add(i.ToString());
+            }
+
             // Run initalization
             FillWithSpace();
             StartTimer();
@@ -49,6 +57,14 @@ namespace Rise_of_Derma.map
             TimeSpent = 0 + elapsed;
             DisplayInformations = displayInformations;
             Playr = playR;
+
+            Playr.Power = 1;
+
+            // Fill the enemyNumbers list
+            for (int i = 1; i < 10; i++)
+            {
+                enemyNumbers.Add(i.ToString());
+            }
 
             // Run initalization
             FillWithSpace();
@@ -252,6 +268,34 @@ namespace Rise_of_Derma.map
         public void setResponseDefault()
         { Response = 0; }
 
+        // Is there enemy left and crystal left?
+        private bool checkEnemyAndCrystalLeft()
+        {
+            List<string> banCharList = new();
+            foreach (var item in enemyNumbers)
+            {
+                banCharList.Add(item);
+            }
+            banCharList.Add("*");
+
+            for (int i = 0; i < W; i++)
+            {
+                for (int j = 0; j < H; j++)
+                {
+                    string k = Area[i, j].ToString();
+
+                    if (k != " ") ; 
+                    {
+                        if (banCharList.Contains(k))
+                        {
+                            return true;
+                        }                        
+                    }
+                }
+            }
+
+            return false;
+        }
 
         public void movePlayer(int x, int y)
         {
@@ -269,6 +313,11 @@ namespace Rise_of_Derma.map
                 else if (c == '#')
                 {
                     Response = 1;
+                }
+                // Exit Button Character
+                else if (c == 'Q')
+                {
+                    Response = 100;
                 }
                 // Wall
                 else if (c == '@')
@@ -289,11 +338,40 @@ namespace Rise_of_Derma.map
                 // Finish Level Character
                 else if (c == 'C')
                 {
-                    IsFinished = true;
-                    timer.Enabled = false;
+                    if (checkEnemyAndCrystalLeft() == false)
+                    {
+                        IsFinished = true;
+                        timer.Enabled = false;                        
+                    }
                 }
-                // TODO: Handle other characters
+                // Enemy characters
+                else if (enemyNumbers.Contains(c.ToString())) 
+                {
+                    // If the player's power is bigger or equal to enemy power kill it
+                    if (Playr.Power >= int.Parse(c.ToString()))
+                    {
+                        // Remove and move player to it's position
+                        SetCharTo(PlayerPos.x, PlayerPos.y, ' ');
+                        SetCharTo(x, y, 'x');
+                        PlayerPos = (x, y);
 
+                        // Bump killed enemy count
+                        Playr.KilledEnemy++;
+
+                        // Bump power to killed enemy power +1 if killed a same power enemy
+                        if (int.Parse(c.ToString()) == Playr.Power)
+                        {
+                            Playr.Power++;
+                        }
+                    }
+                    // Less power, game over
+                    else
+                    {
+                        Response = 10;
+                        IsFinished = true;
+                        timer.Enabled = false;
+                    }
+                }
                 // If not any special case than move player to the wanted position
                 else
                 {

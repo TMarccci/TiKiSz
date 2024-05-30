@@ -15,7 +15,7 @@
 
         public Player() 
         {
-            Power = 0;
+            Power = 1;
             KilledEnemy = 0;
             CrystcalCount = 0;
         }

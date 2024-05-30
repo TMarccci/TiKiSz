@@ -5,17 +5,17 @@ using System.Diagnostics;
 
 namespace Rise_of_Derma.scenarios
 {
-    public class Level1
+    public class Level3
     {
-        public (int, Player, bool) InitLevel1(int elapsed, Player player, bool gameOver)
+        public (int, Player, bool) InitLevel3(int elapsed, Player player, bool gameOver)
         {
             if (gameOver == false) 
             {
                 // Print debug
-                Debug.WriteLine("Running Level1");
+                Debug.WriteLine("Running Level3");
 
                 // Create and display matrix (LevelFile's content, ShowTime Setting, Elapsed Time)
-                Matrix matrix = new Matrix(File.ReadAllLines("./scenarios/builds/Level1.txt", encoding: System.Text.Encoding.UTF8), true, elapsed, player);
+                Matrix matrix = new Matrix(File.ReadAllLines("./scenarios/builds/Level3.txt", encoding: System.Text.Encoding.UTF8), true, elapsed, player);
 
                 // Loop until level finished
                 while (matrix.isFinished() == false)
